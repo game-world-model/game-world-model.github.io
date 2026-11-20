@@ -177,6 +177,8 @@ em{font-style:normal}
 .cover-actions{display:flex;align-items:center;flex-wrap:wrap;gap:clamp(6px,.7vw,10px);margin-top:26px}
 .plink{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 clamp(13px,1.1vw,18px);border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.05);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:600 14px/1 var(--sans);color:#fff4e8;pointer-events:auto;transition:background .18s,border-color .18s,transform .18s,color .18s}
 .plink svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.plink .forgeax-mark{width:18px;height:18px;fill:#e8692c;stroke:none;border-radius:4px}
+.plink-engine small{background:rgba(232,105,44,.16);color:#ffb07a}
 a.plink:hover{background:rgba(255,122,0,.14);border-color:var(--gold);color:var(--gold-hi);transform:translateY(-2px)}
 .plink.is-soon{color:rgba(255,244,232,.55);border-color:rgba(255,255,255,.16);cursor:default}
 .plink small{margin-left:2px;padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.08);font:500 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
