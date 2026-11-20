@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>GameWM · Toward Next-Generation Video Games with Interaction-Centric World Models</title>
-<meta name="description" content="GameWM: an engine keeps the rules, state and camera; a video model generates the look of the world and the detail of every interaction. Technical report by Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie and Zhongyuan Liu, Tencent.">
+<meta name="description" content="GameWM: an engine keeps the rules, state and camera; a video model generates the look of the world and the detail of every interaction. Technical report by Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie and Zhongyuan Liu, Lightspeed Studios, Tencent.">
 <meta name="theme-color" content="#0d0d0d">
 <meta property="og:title" content="GameWM · Interaction-Centric World Models">
 <meta property="og:description" content="One engine mechanic. Many realizations.">
@@ -15,7 +15,7 @@
 <link rel="preload" href="fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="a/img/hero-4k.jpg" imagesrcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" imagesizes="100vw">
-<link rel="stylesheet" href="styles.css?v=20261120g">
+<link rel="stylesheet" href="styles.css?v=20261120h">
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -56,7 +56,28 @@
       <div class="cover-mark" aria-hidden="true">GAME<span class="gold">WM</span></div>
       <p class="cover-kicker">Technical report <i></i> November 2026</p>
       <h1 id="cover-title"><span class="sr-only">GameWM: </span>Toward Next-Generation Video Games with Interaction-Centric World Models</h1>
-      <p class="cover-authors">Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie, Zhongyuan Liu <span aria-hidden="true">·</span> Tencent</p>
+      <div class="cover-authors">
+        <p class="author-names">
+          <a href="https://hebing-sjtu.github.io/" target="_blank" rel="noopener">Bing He</a><sup>*</sup>,
+          <a href="https://rainzor.github.io/" target="_blank" rel="noopener">Runze Wang</a><sup>*,†</sup>,
+          <a href="https://char-1232323.github.io/zhafei.io/" target="_blank" rel="noopener">Fei Zha</a><sup>*</sup>,
+          <span>Zhongyuan Wu</span>,
+          <span>Ke Xu</span>,
+          <span>Tao Zhuang</span>,
+          <span>Yuxuan Xie</span>,
+          <a href="https://digiartomnis.github.io/index.html" target="_blank" rel="noopener">Zhongyuan Liu</a><sup>‡</sup>
+        </p>
+        <p class="author-meta">
+          <span class="author-affil">Lightspeed Studios, Tencent</span>
+          <span class="author-notes">
+            <span><sup>*</sup>Equal contribution</span>
+            <i class="sep" aria-hidden="true">·</i>
+            <span><sup>†</sup>Project lead</span>
+            <i class="sep" aria-hidden="true">·</i>
+            <span><sup>‡</sup>Corresponding author</span>
+          </span>
+        </p>
+      </div>
       <div class="cover-actions">
         <a class="plink" href="https://arxiv.org/abs/2611.19247" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><span>Paper</span></a>
         <a class="plink plink-engine" href="https://forgeax.github.io" target="_blank" rel="noopener"><svg class="forgeax-mark" viewBox="0 0 323 313.539" aria-hidden="true"><path d="M323 313.539H0V0H323V313.539ZM274.162 214.046L262.889 202.772L251.968 213.692L263.241 224.967L258.291 229.918L228.788 229.927L228.791 253.206H172.164V268.649H228.791V282.859L220.092 276.371H209.809V291.815H214.968L220.587 296.005L220.815 296.174C230.564 303.177 244.234 296.223 244.234 284.141V268.649H303.435V253.206H244.234V245.365L264.69 245.358L274.162 235.887L285.43 247.154L296.35 236.233L285.082 224.967L296.678 213.371L285.757 202.451L274.162 214.046ZM136.1 172.771V298.25H151.543V172.771H136.1ZM20.2725 244.841V260.284H100.708V273.798C100.708 278.062 97.2499 281.52 92.9854 281.52H20.2725V296.963H92.9854C105.779 296.963 116.151 286.592 116.151 273.798V244.841H20.2725ZM172.164 276.371V291.815H203.052V276.371H172.164ZM250.669 276.371V291.815H303.435V276.371H250.669ZM172.164 230.041V245.484H222.034V230.041H172.164ZM20.2725 172.771V188.214H100.708V202.371C100.708 206.636 97.2499 210.093 92.9854 210.093H20.2725V225.536H92.9854C105.779 225.536 116.151 215.165 116.151 202.371V172.771H20.2725ZM172.164 206.231V221.676H236.513V206.231H172.164ZM182.46 172.771V177.919H172.164V193.362H182.46V199.153H197.903V193.362H210.773V199.153H226.217V193.362H236.513V177.919H226.217V172.771H210.773V177.919H197.903V172.771H182.46ZM243.591 172.771V199.153H259.034V193.362H303.435V177.919H259.034V172.771H243.591ZM172.164 19.5635V35.0078H226.821L214.627 76.5645C212.693 83.1571 217.636 89.7587 224.507 89.7588H244.218L232.528 129.6H172.164V145.043H303.435V129.6H248.623L260.972 87.5098C262.906 80.9171 257.963 74.3156 251.093 74.3154H231.383L242.845 35.251L242.015 35.0078H303.435V19.5635H172.164ZM151.543 124.438C111.742 96.2565 60.0733 96.2566 20.2725 124.438V144.698C57.2307 110.61 114.585 110.61 151.543 144.698V124.438ZM20.2725 56.8857V72.0078H151.543V56.8857H20.2725ZM20.2725 18.9199V35.6514H151.543V18.9199H20.2725Z"/></svg><span>ForgeAX</span><small>AI-native engine</small></a>
@@ -263,7 +284,7 @@
 <footer class="foot">
   <div class="wrap foot-in">
     <a class="foot-mark" href="#cover">GAME<span class="gold">WM</span></a>
-    <p>Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie, Zhongyuan Liu · Tencent · 2026</p>
+    <p>Bing He<sup>*</sup>, Runze Wang<sup>*,†</sup>, Fei Zha<sup>*</sup>, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie, Zhongyuan Liu<sup>‡</sup> · Lightspeed Studios, Tencent · 2026</p>
     <a href="#cover" class="link">Back to top <span aria-hidden="true">↑</span></a>
   </div>
 </footer>
