@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GameWM · Toward Next-Generation Video Games with Interaction-Centric World Models</title>
+<meta name="description" content="GameWM: an engine keeps the rules, state and camera; a video model generates the look of the world and the detail of every interaction. Technical report by Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie and Zhongyuan Liu, Tencent.">
+<meta name="theme-color" content="#0d0d0d">
+<meta property="og:title" content="GameWM · Interaction-Centric World Models">
+<meta property="og:description" content="One engine mechanic. Many realizations.">
+<meta property="og:image" content="https://game-world-model.github.io/a/img/hero.jpg">
+<meta property="og:url" content="https://game-world-model.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0d0d'/%3E%3Cpath d='M18 46 30 18h6L24 46z' fill='%23ff7a00'/%3E%3Cpath d='M32 46 44 18h6L38 46z' fill='%23ff7a00' opacity='.55'/%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="a/img/hero-4k.jpg" imagesrcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" imagesizes="100vw">
+<link rel="stylesheet" href="styles.css?v=20261120c">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#cover">Skip to content</a>
+
+<header class="nav" id="nav">
+  <a class="nav-mark" href="#cover" aria-label="GameWM, back to the cover">GAME<span class="gold">WM</span></a>
+  <nav class="nav-links" id="nav-links" aria-label="Sections">
+    <a href="#cover">Cover</a><a href="#overview">Overview</a><a href="#idea">Idea</a><a href="#method">Method</a><a href="#result">Result</a><a href="#cite">Paper</a>
+  </nav>
+  <button class="nav-menu" id="nav-menu" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+  <span class="nav-progress" id="nav-progress" aria-hidden="true"></span>
+</header>
+
+<main>
+<!-- ============ 00 · COVER ============ -->
+<section class="cover" id="cover" data-state="overview" aria-labelledby="cover-title">
+  <div class="cover-stage">
+    <div class="cover-art">
+      <div class="cover-canvas" role="group" aria-label="Choose a character to watch its skill">
+        <button type="button" class="strip" data-k="fire" style="--i:0;--poly:polygon(0.000% 0.000%,16.207% 0.000%,6.234% 100.000%,0.000% 100.000%);--cx:4.513%" aria-label="Fire mage: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async" fetchpriority="high"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>01</b>Fire mage</span></button>
+        <button type="button" class="strip" data-k="ice" style="--i:1;--poly:polygon(16.207% 0.000%,28.959% 0.000%,18.928% 100.000%,6.234% 100.000%);--cx:15.382%" aria-label="Ice mage: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>02</b>Ice mage</span></button>
+        <button type="button" class="strip" data-k="rifle" style="--i:2;--poly:polygon(28.959% 0.000%,42.205% 0.000%,31.853% 100.000%,18.928% 100.000%);--cx:28.244%" aria-label="Rifle soldier: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>03</b>Rifle soldier</span></button>
+        <button type="button" class="strip" data-k="dart" style="--i:3;--poly:polygon(42.205% 0.000%,54.186% 0.000%,44.205% 100.000%,31.853% 100.000%);--cx:40.876%" aria-label="Dart fighter: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>04</b>Dart fighter</span></button>
+        <button type="button" class="strip" data-k="vampire" style="--i:4;--poly:polygon(54.186% 0.000%,66.299% 0.000%,56.489% 100.000%,44.205% 100.000%);--cx:53.118%" aria-label="Vampire: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>05</b>Vampire</span></button>
+        <button type="button" class="strip" data-k="thunder" style="--i:5;--poly:polygon(66.299% 0.000%,78.698% 0.000%,69.246% 100.000%,56.489% 100.000%);--cx:65.564%" aria-label="Thunder warrior: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>06</b>Thunder warrior</span></button>
+        <button type="button" class="strip" data-k="forest" style="--i:6;--poly:polygon(78.698% 0.000%,91.543% 0.000%,82.092% 100.000%,69.246% 100.000%);--cx:78.315%" aria-label="Forest druid: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>07</b>Forest druid</span></button>
+        <button type="button" class="strip" data-k="arcane" style="--i:7;--poly:polygon(91.543% 0.000%,100.000% 0.000%,100.000% 100.000%,82.092% 100.000%);--cx:92.369%" aria-label="Arcane sorceress: play its skill"><img src="a/img/hero-4k.jpg" srcset="a/img/hero.jpg 1280w, a/img/hero-4k.jpg 3840w" sizes="100vw" width="3840" height="2160" alt="" decoding="async"><video class="strip-video" muted playsinline loop preload="none" aria-hidden="true"></video><span class="strip-name"><b>08</b>Arcane sorceress</span></button>
+        <svg class="cover-frame" id="cover-frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon points=""></polygon></svg>
+      </div>
+    </div>
+    <div class="cover-player" aria-hidden="true">
+      <video class="cover-video" muted playsinline preload="none" poster="a/video/teaser-effect-fire.jpg" aria-label="Generated skill video"></video>
+      <div class="cover-shade" aria-hidden="true"></div>
+    </div>
+
+    <div class="cover-copy">
+      <div class="cover-mark" aria-hidden="true">GAME<span class="gold">WM</span></div>
+      <p class="cover-kicker">Technical report <i></i> November 2026</p>
+      <h1 id="cover-title"><span class="sr-only">GameWM: </span>Toward Next-Generation Video Games with Interaction-Centric World Models</h1>
+      <p class="cover-authors">Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie, Zhongyuan Liu <span aria-hidden="true">·</span> Tencent</p>
+      <div class="cover-actions">
+        <a class="plink" href="https://arxiv.org/pdf/2611.19247" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg><span>Paper</span></a>
+        <a class="plink" href="https://forgeax.github.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v2.6M12 18.8v2.6M21.4 12h-2.6M5.2 12H2.6M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8M18.6 18.6l-1.8-1.8M7.2 7.2 5.4 5.4"/></svg><span>Engine</span></a>
+        <span class="plink is-soon" aria-disabled="true" title="Coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg><span>Code</span><small>Soon</small></span>
+        <span class="plink is-soon" aria-disabled="true" title="Coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 7.5v9L12 21l8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg><span>Weights</span><small>Soon</small></span>
+        <span class="plink is-soon" aria-disabled="true" title="Coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg><span>Data</span><small>Soon</small></span>
+        <a class="plink" href="#cite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h4v4c0 2.5-1.5 4.5-4 5M14 7h4v4c0 2.5-1.5 4.5-4 5"/></svg><span>Citation</span></a>
+      </div>
+    </div>
+    <p class="cover-hint"><span>Eight characters · eight skills</span><strong><em class="mouse">Hover to focus · Click to play the clip</em><em class="touch">Tap a character to play its clip</em></strong></p>
+
+    <div class="cover-panel" aria-hidden="true">
+      <button type="button" class="cover-zoomout" data-back aria-label="Zoom out to all eight characters"><span aria-hidden="true">⤡</span> Zoom out</button>
+      <div class="cover-rail" role="group" aria-label="Switch character">
+        <button type="button" data-pick="fire" aria-pressed="false" aria-label="Fire mage"><img src="a/img/concept-fire.jpg" width="160" height="720" alt="" loading="lazy"><span>Fire mage</span></button>
+        <button type="button" data-pick="ice" aria-pressed="false" aria-label="Ice mage"><img src="a/img/concept-ice.jpg" width="160" height="720" alt="" loading="lazy"><span>Ice mage</span></button>
+        <button type="button" data-pick="rifle" aria-pressed="false" aria-label="Rifle soldier"><img src="a/img/concept-rifle.jpg" width="160" height="720" alt="" loading="lazy"><span>Rifle soldier</span></button>
+        <button type="button" data-pick="dart" aria-pressed="false" aria-label="Dart fighter"><img src="a/img/concept-dart.jpg" width="160" height="720" alt="" loading="lazy"><span>Dart fighter</span></button>
+        <button type="button" data-pick="vampire" aria-pressed="false" aria-label="Vampire"><img src="a/img/concept-vampire.jpg" width="160" height="720" alt="" loading="lazy"><span>Vampire</span></button>
+        <button type="button" data-pick="thunder" aria-pressed="false" aria-label="Thunder warrior"><img src="a/img/concept-thunder.jpg" width="160" height="720" alt="" loading="lazy"><span>Thunder warrior</span></button>
+        <button type="button" data-pick="forest" aria-pressed="false" aria-label="Forest druid"><img src="a/img/concept-forest.jpg" width="160" height="720" alt="" loading="lazy"><span>Forest druid</span></button>
+        <button type="button" data-pick="arcane" aria-pressed="false" aria-label="Arcane sorceress"><img src="a/img/concept-arcane.jpg" width="160" height="720" alt="" loading="lazy"><span>Arcane sorceress</span></button>
+      </div>
+      <div class="cover-hud">
+        <p class="cover-hud-kicker" data-kicker>Generated from the proxy · GameWM-H3-33B</p>
+        <h2 class="cover-hud-title"><span data-name>Fire mage</span><strong data-skill>Black flame</strong></h2>
+        <div class="cover-controls">
+          <button type="button" class="btn btn-glass" data-replay>Replay <span aria-hidden="true">↻</span></button>
+          <button type="button" class="btn btn-glass" data-back>All characters</button>
+        </div>
+      </div>
+      <div class="cover-inputs" aria-label="Inputs for this clip">
+        <figure><img data-sheet src="a/img/sheet-fire.jpg" width="640" height="360" loading="lazy" alt="Fire mage identity sheet"><figcaption><i class="dot gold-dot"></i>Identity sheet</figcaption></figure>
+        <figure><video class="cover-proxy" muted playsinline loop preload="none" poster="a/video/teaser-capsule-fire.jpg" aria-label="Proxy of the same event"></video><figcaption><i class="dot teal-dot"></i>Proxy</figcaption></figure>
+      </div>
+      <p class="cover-note" data-note>Rendered from its own proxy (inset).</p>
+    </div>
+    <p class="sr-only" data-status role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ============ 01 · OVERVIEW ============ -->
+<section class="sec sub promo" id="overview" aria-labelledby="promo-title">
+  <div class="wrap">
+    <header class="sec-head one" data-reveal><h2 class="title" id="promo-title">Overview</h2></header>
+
+    <div class="reel" id="reel" role="region" aria-roledescription="carousel" aria-label="GameWM films" tabindex="0" data-reveal>
+      <div class="reel-stage">
+        <article class="reel-slide" aria-roledescription="slide" aria-label="GameWM promo film">
+          <div class="glass" style="--poster:url(a/video/promo-v8.jpg?v=20261120e)">
+            <div class="reel-screen">
+              <video data-lead muted playsinline preload="none" poster="a/video/promo-v8.jpg?v=20261120e" data-src="a/video/promo-v8.mp4?v=20261120e" aria-label="GameWM promo film"></video>
+              <span class="tag tag-gen tag-tl"><i></i>Promo film · 1:01</span>
+              <div class="reel-tools"><button type="button" class="reel-tool" data-sound aria-pressed="false">Sound on</button><button type="button" class="reel-tool" data-full aria-label="Play full screen">⤢</button></div>
+            </div>
+          </div>
+          <div class="reel-cap"><span>01</span><h3>GameWM <em>· Promo film</em></h3></div>
+        </article>
+      </div>
+      <div class="reel-controls">
+        <button type="button" class="reel-arrow" data-reel-prev aria-label="Previous film">←</button>
+        <div class="reel-dots" role="group" aria-label="Choose a film"></div>
+        <p class="reel-count" aria-live="polite"></p>
+        <button type="button" class="reel-arrow" data-reel-next aria-label="Next film">→</button>
+      </div>
+    </div>
+
+
+    <div class="numbers" data-reveal aria-label="The system in numbers">
+      <div class="num"><strong><span data-count="5">5</span>B–<span data-count="33">33</span>B</strong><p>model family</p></div>
+      <div class="num"><strong data-count="28">28</strong><p>pairs per clip</p></div>
+      <div class="num"><strong data-count="0.588" data-dec="3">0.588</strong><p>identity score</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · IDEA ============ -->
+<section class="sec studio" id="idea" data-tab="chars" aria-labelledby="idea-title">
+  <div class="wrap wide">
+    <header class="sec-head one" data-reveal><h2 class="title" id="idea-title">One mechanic. Many realizations.</h2></header>
+
+    <div class="console" id="console" data-reveal>
+      <aside class="c-panel" aria-label="Studio controls">
+        <div class="c-brand"><span>GAME<b class="gold">WM</b> Studio</span><em id="c-model">GameWM-H3</em></div>
+        <div class="seg seg-full" id="c-tab" role="group" aria-label="What to swap"><button type="button" data-t="chars" aria-pressed="true">Characters <small>8</small></button><button type="button" data-t="magic" aria-pressed="false">Magic <small>10</small></button></div>
+        <div class="seg seg-full seg-sm" id="c-mode" role="group" aria-label="Mechanic"></div>
+        <p class="c-label" id="c-picklabel">Pick a hero</p>
+        <div class="c-picker" id="c-picker" role="group" aria-label="Pick one"></div>
+        <div class="c-inputs">
+          <figure class="c-slot"><video id="c-proxy" muted playsinline loop preload="none" aria-label="Proxy input"></video><figcaption><i class="dot teal-dot"></i>Proxy</figcaption></figure>
+          <figure class="c-slot" id="c-ref"><img id="c-sheet" alt="" loading="lazy"><span class="c-reftext" id="c-reftext"></span><figcaption id="c-refcap"><i class="dot gold-dot"></i>Identity sheet</figcaption></figure>
+        </div>
+        <div class="c-prompt"><span class="c-prompt-tag">Text</span><p id="c-prompt"></p></div>
+        <button type="button" class="c-gen" id="c-gen"><span id="c-gen-label">Generate</span><kbd>↵</kbd></button>
+        <div class="c-status" id="c-status" data-s="idle"><i></i><span id="c-stext">Ready</span><b><em id="c-bar"></em></b></div>
+      </aside>
+
+      <div class="c-stage">
+        <div class="c-bar">
+          <span class="c-meta" id="c-meta">Ranged · GameWM-H3-33B</span>
+          <span class="c-viewed" id="c-viewed" title="Character × mechanic combinations you have watched"><span class="c-dots" id="c-dots" aria-hidden="true"></span><em id="c-vtext">0 / 24 viewed</em></span>
+        </div>
+        <div class="flow" id="flow">
+          <div class="flow-cards" id="flow-cards"></div>
+          <div class="live" id="live" style="--split:0%">
+            <video class="live-proxy" id="live-proxy" muted playsinline loop preload="none" aria-label="Proxy"></video>
+            <video class="live-out" id="live-out" muted playsinline loop preload="none" aria-label="Generated video"></video>
+            <div class="live-scan" aria-hidden="true"></div>
+            <span class="live-edge" aria-hidden="true"><i>⇆</i></span>
+            <span class="tag tag-proxy tag-tl live-ltag"><i></i>Proxy</span>
+            <span class="tag tag-gen tag-tr live-rtag"><i></i><em id="live-gtag">GameWM</em></span>
+            <div class="live-hud" aria-hidden="true"><p class="lh-k" id="lh-k">Generating</p><p class="lh-step" id="lh-step">Queued</p><p class="lh-n" id="lh-n">0 / 30</p></div>
+            <div class="live-cap"><p class="kicker-sm" id="live-kicker">Generated from the proxy</p><h3 id="live-name">Fire mage</h3><p class="live-skill" id="live-skill">Fireball</p></div>
+            <span class="live-hint" id="live-hint">Drag to compare with the proxy</span>
+          </div>
+          <button type="button" class="flow-arrow prev" id="flow-prev" aria-label="Previous">←</button>
+          <button type="button" class="flow-arrow next" id="flow-next" aria-label="Next">→</button>
+        </div>
+        <div class="c-time" id="c-time">
+          <div class="ct-track" id="ct-track"><b class="ct-head" id="ct-head"></b></div>
+          <svg class="ct-links" id="ct-links" aria-hidden="true"></svg>
+          <div class="ct-frames" id="ct-frames"></div>
+        </div>
+        <div class="c-notes" id="c-notes"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · METHOD ============ -->
+<section class="sec method" id="method" aria-labelledby="method-title">
+  <div class="wrap wide">
+    <header class="sec-head one" data-reveal><h2 class="title" id="method-title">Method</h2></header>
+    <div class="sub-bar mbar" data-reveal>
+      <div class="mbar-l"><p class="sub-label">How one clip is made</p><p class="g-run" id="g-state" aria-live="polite">Press play, or pick a step.</p></div>
+      <div class="row">
+        <span class="mbar-k">Skill</span>
+        <div class="seg seg-sm" role="group" aria-label="Skill"><button type="button" data-skill="fireball" aria-pressed="true">Ranged</button><button type="button" data-skill="flame" aria-pressed="false">Melee</button></div>
+        <button type="button" class="btn btn-gold" id="g-play">Play the steps <span aria-hidden="true">▶</span></button>
+      </div>
+    </div>
+    <div class="msteps" id="msteps" data-reveal></div>
+  </div>
+</section>
+
+<!-- ============ 06 · DATA ENGINE ============ -->
+<section class="sec sub data" id="data" aria-label="Dataset">
+  <div class="wrap">
+    <p class="sub-label" data-reveal>Dataset <span>training clips</span></p>
+    <p class="ds-group" data-reveal>Interaction-centric data curation <span>one event per clip · drag to compare · pick a look</span></p>
+    <div class="ds ds-wipe" data-reveal>
+      <figure class="dsw" data-k="melee"><div class="media" style="--split:50%"><canvas width="640" height="360" aria-label="Melee attack: recording on the left, processed training data on the right"></canvas><video muted loop playsinline preload="none"></video><span class="dsw-line" aria-hidden="true"><b>⇆</b></span><span class="dsw-tag l">Recording</span><span class="dsw-tag r"></span></div><figcaption><span>Melee attack</span><span class="dsw-styles" role="group" aria-label="Training data look"></span></figcaption></figure>
+      <figure class="dsw" data-k="enter"><div class="media" style="--split:50%"><canvas width="640" height="360" aria-label="Vehicle entry: recording on the left, processed training data on the right"></canvas><video muted loop playsinline preload="none"></video><span class="dsw-line" aria-hidden="true"><b>⇆</b></span><span class="dsw-tag l">Recording</span><span class="dsw-tag r"></span></div><figcaption><span>Vehicle entry</span><span class="dsw-styles" role="group" aria-label="Training data look"></span></figcaption></figure>
+      <figure class="dsw" data-k="exit"><div class="media" style="--split:50%"><canvas width="640" height="360" aria-label="Vehicle exit: recording on the left, processed training data on the right"></canvas><video muted loop playsinline preload="none"></video><span class="dsw-line" aria-hidden="true"><b>⇆</b></span><span class="dsw-tag l">Recording</span><span class="dsw-tag r"></span></div><figcaption><span>Vehicle exit</span><span class="dsw-styles" role="group" aria-label="Training data look"></span></figcaption></figure>
+      <figure class="dsw" data-k="drive"><div class="media" style="--split:50%"><canvas width="640" height="360" aria-label="Driving: recording on the left, processed training data on the right"></canvas><video muted loop playsinline preload="none"></video><span class="dsw-line" aria-hidden="true"><b>⇆</b></span><span class="dsw-tag l">Recording</span><span class="dsw-tag r"></span></div><figcaption><span>Driving</span><span class="dsw-styles" role="group" aria-label="Training data look"></span></figcaption></figure>
+      <figure class="dsw" data-k="moto-mount"><div class="media" style="--split:50%"><canvas width="640" height="360" aria-label="Mount a motorcycle: recording on the left, processed training data on the right"></canvas><video muted loop playsinline preload="none"></video><span class="dsw-line" aria-hidden="true"><b>⇆</b></span><span class="dsw-tag l">Recording</span><span class="dsw-tag r"></span></div><figcaption><span>Mount a motorcycle</span><span class="dsw-styles" role="group" aria-label="Training data look"></span></figcaption></figure>
+      <figure class="dsw" data-k="crash"><div class="media" style="--split:50%"><canvas width="640" height="360" aria-label="Crash into a wall: recording on the left, processed training data on the right"></canvas><video muted loop playsinline preload="none"></video><span class="dsw-line" aria-hidden="true"><b>⇆</b></span><span class="dsw-tag l">Recording</span><span class="dsw-tag r"></span></div><figcaption><span>Crash into a wall</span><span class="dsw-styles" role="group" aria-label="Training data look"></span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · RESULT ============ -->
+<section class="sec looks-sec" id="result" aria-labelledby="result-title">
+  <div class="wrap wide">
+    <header class="sec-head one" data-reveal><h2 class="title" id="result-title">Result</h2></header>
+    <p class="sub-label lib-label" data-reveal>Coarse-grained interaction <span>hover for proxy</span></p>
+    <div class="lib" id="lib" data-reveal></div>
+
+  </div>
+</section>
+
+<!-- ============ 08 · CITATION ============ -->
+<section class="sec cite" id="cite" aria-labelledby="cite-title">
+  <div class="wrap">
+    <header class="sec-head one" data-reveal>
+      <h2 class="title" id="cite-title">Paper</h2>
+      <div class="row"><a class="btn btn-gold" href="https://arxiv.org/pdf/2611.19247" target="_blank" rel="noopener">Read the full paper <span aria-hidden="true">↗</span></a></div>
+    </header>
+    <div class="cite-grid" data-reveal>
+      <a class="paper" href="https://arxiv.org/pdf/2611.19247" target="_blank" rel="noopener" aria-label="Open the technical report PDF"><img src="a/img/paper-p1.jpg" width="720" height="1018" alt="First page of the GameWM technical report" loading="lazy"><span>35 pages · PDF ↗</span></a>
+      <div class="cite-body">
+        <p class="cite-meta"><span>Technical report</span><i></i><span>Tencent</span><i></i><span>November 2026</span></p>
+        <div class="bib">
+          <div class="bib-bar"><span>BibTeX</span><button type="button" id="copy-bib">Copy citation <span aria-hidden="true">⧉</span></button></div>
+<pre id="bibtex">@techreport{gamewm2026,
+  title       = {GameWM: Toward Next-Generation Video Games
+                 with Interaction-Centric World Models},
+  author      = {Bing He and Runze Wang and Fei Zha and Zhongyuan Wu
+                 and Ke Xu and Tao Zhuang and Yuxuan Xie and Zhongyuan Liu},
+  institution = {Tencent},
+  year        = {2026},
+  month       = nov
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="foot-mark" href="#cover">GAME<span class="gold">WM</span></a>
+    <p>Bing He, Runze Wang, Fei Zha, Zhongyuan Wu, Ke Xu, Tao Zhuang, Yuxuan Xie, Zhongyuan Liu · Tencent · 2026</p>
+    <a href="#cover" class="link">Back to top <span aria-hidden="true">↑</span></a>
+  </div>
+</footer>
+
+<dialog id="lb" aria-labelledby="lb-cap"><div class="lb-bar"><span>GameWM / Figure view</span><button type="button" id="lb-close">Close <span aria-hidden="true">×</span></button></div><div class="lb-img"><img id="lb-img" alt=""></div><p id="lb-cap"></p></dialog>
+<div class="grain" aria-hidden="true"></div>
+<script src="app.js?v=20261120d" defer></script>
+</body>
+</html>
