@@ -596,10 +596,12 @@ a.plink:hover{background:rgba(255,122,0,.14);border-color:var(--gold);color:var(
 .cite-grid{display:grid;grid-template-columns:minmax(200px,286px) minmax(0,1fr);gap:clamp(30px,4vw,72px);align-items:center}
 .cite-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;font:500 11px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
 .cite-meta i{width:16px;height:1px;background:var(--line-3)}
-.paper{position:relative;display:block;border-radius:8px;overflow:hidden;transform:rotate(-3deg);box-shadow:0 50px 90px -30px rgba(0,0,0,.95),0 0 0 1px var(--line-2),0 0 120px -40px rgba(255,122,0,.35);transition:transform .5s var(--ease)}
+.paper{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:380px;padding:28px 24px 72px;border-radius:8px;overflow:hidden;color:#f6f3ec;text-decoration:none;background:radial-gradient(120% 80% at 20% 0%,rgba(255,122,0,.22),transparent 55%),linear-gradient(180deg,#1a120c,#0c0d10 62%);transform:rotate(-3deg);box-shadow:0 50px 90px -30px rgba(0,0,0,.95),0 0 0 1px var(--line-2),0 0 120px -40px rgba(255,122,0,.35);transition:transform .5s var(--ease)}
 .paper:hover{transform:rotate(0) translateY(-8px)}
-.paper img{width:100%}
-.paper span{position:absolute;left:12px;bottom:12px;padding:8px 11px;border-radius:7px;background:rgba(5,6,8,.86);font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi)}
+.paper-kicker{font:500 12px/1 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-hi)}
+.paper-id{font:500 clamp(28px,2.4vw,36px)/1 var(--serif);font-style:italic;letter-spacing:-.02em}
+.paper-sub{max-width:16ch;font:500 14px/1.35 var(--sans);color:rgba(255,244,232,.68)}
+.paper span{position:absolute;left:16px;bottom:16px;padding:8px 11px;border-radius:7px;background:rgba(5,6,8,.86);font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi)}
 .bib{border-radius:16px;border:1px solid var(--line);background:#0a0b0d;overflow:hidden}
 .bib-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--line);font:500 11.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--tx-3)}
 .bib-bar button{font:600 13.5px var(--sans);letter-spacing:0;text-transform:none;color:var(--gold-hi)}

@@ -13,7 +13,7 @@ const seek = (v, t) => { try { v.currentTime = t; } catch (e) { /* metadata not 
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const raf2 = fn => requestAnimationFrame(() => requestAnimationFrame(fn));
 const capture = (node, id) => { try { node.setPointerCapture(id); } catch (e) { /* pointer already released */ } };
-const PDF = "https://arxiv.org/pdf/2611.19247";
+const PDF = "https://arxiv.org/abs/2611.19247";
 const CLIP = 5.167;
 
 const CH = {
